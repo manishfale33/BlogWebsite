@@ -26,9 +26,9 @@ class BlogModel(models.Model):
         return self.title
     
     def save(self, *args, **kwargs):
-         self.slug = generate_slug()(self.title)
-         super(BlogModel, self).save(*args, **kwargs)
-
+        self.slug = generate_slug(self.title)  # Provide 'text' argument
+        super().save(*args, **kwargs)
+        
 def view_post(request, post_id):
     post = get_object_or_404(BlogModel, pk=post_id)
     post.view_count += 1  # Increment the view count
