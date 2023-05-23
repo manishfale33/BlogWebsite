@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import *
+from home.views import category_list, filter_posts_by_category
 
 urlpatterns = [
    
-]
+   ]
