@@ -4,5 +4,9 @@ from django.contrib import admin
 from .models import BlogModel
 from .models import Category
 
+
+
+
 admin.site.register(BlogModel)
 admin.site.register(Category)
+
