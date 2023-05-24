@@ -21,7 +21,7 @@ class BlogModel(models.Model):
     upload_to = models.DateTimeField(auto_now=True)
     view_count = models.IntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-
+    like_post = models.IntegerField(default=0)
     def __str__(self):
         return self.title
     
