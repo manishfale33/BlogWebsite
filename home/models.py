@@ -28,12 +28,45 @@ class BlogModel(models.Model):
     def save(self, *args, **kwargs):
         self.slug = generate_slug(self.title)  # Provide 'text' argument
         super().save(*args, **kwargs)
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(BlogModel, on_delete=models.CASCADE)
+    like = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.user.username} likes {self.blog.title}"    
         
+
 def view_post(request, post_id):
     post = get_object_or_404(BlogModel, pk=post_id)
-    post.view_count += 1  # Increment the view count
+    post.view_count += 1
     post.save()
-    return render(request, 'blog/view_post.html', {'post': post})
+
+    liked = False
+    if request.user.is_authenticated:
+        liked = Like.objects.filter(user=request.user, blog=post, like=True).exists()
+
+    return render(request, 'blog/view_post.html', {'post': post, 'liked': liked})
+
+def like_post(request, post_id):
+    if request.method == 'POST' and request.user.is_authenticated:
+        post = get_object_or_404(BlogModel, pk=post_id)
+        like, created = Like.objects.get_or_create(user=request.user, blog=post)
+        like.like = True
+        like.save()
+
+    return redirect('view_post', post_id=post_id)
+
+
+def dislike_post(request, post_id):
+    if request.method == 'POST' and request.user.is_authenticated:
+        post = get_object_or_404(BlogModel, pk=post_id)
+        like, created = Like.objects.get_or_create(user=request.user, blog=post)
+        like.like = False
+        like.save()
+
+    return redirect('view_post', post_id=post_id)
 
 def filter_posts_by_category(request, category_id):
     category = get_object_or_404(Category, pk=category_id)
