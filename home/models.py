@@ -23,7 +23,8 @@ class BlogModel(models.Model):
     upload_to = models.DateTimeField(auto_now=True)
     view_count = models.IntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    like_post = models.IntegerField(default=0)
+    like = models.IntegerField(default=0)
+
     def __str__(self):
         return self.title
     
@@ -31,14 +32,17 @@ class BlogModel(models.Model):
         self.slug = generate_slug(self.title)  # Provide 'text' argument
         super().save(*args, **kwargs)
 
+    def like_count(self):
+        return Like.objects.filter(blog=self, like=True).count()    
+
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    blog = models.ForeignKey(BlogModel, on_delete=models.CASCADE)
+    blog = models.ForeignKey(BlogModel, on_delete=models.CASCADE, related_name='likes')
     like = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.user.username} likes {self.blog.title}"    
-        
+        return f"{self.user.username} likes {self.blog.title}"
+
 
 def view_post(request, post_id):
     post = get_object_or_404(BlogModel, pk=post_id)
