@@ -25,3 +25,4 @@ class LikeListCreateView(generics.ListCreateAPIView):
 class LikeRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
+
