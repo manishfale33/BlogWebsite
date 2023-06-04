@@ -13,7 +13,9 @@ const Footer = () => {
       <div className='flex flex-col justify-between'>
         <div>
           <h1 className='w-full text-3xl font-bold text-[#38bdf8]'>MUNity Blogs</h1>
-          <p className='py-4'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id odit ullam iste repellat consequatur libero reiciendis, blanditiis accusantium.</p>
+          <p className='py-4'>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id odit ullam iste repellat consequatur libero reiciendis, blanditiis accusantium.
+          </p>
         </div>
         <div className='flex justify-between md:w-[75%] my-6'>
           <FaFacebookSquare size={30} />
@@ -43,6 +45,7 @@ const Footer = () => {
           />
           <button className='bg-[#38bdf8] py-2 px-4 mt-2 rounded-md text-white'>Subscribe</button>
         </div>
+        <p className='text-sm text-neutral-500 dark:text-neutral-400'>© 2023 MUNity. All Rights Reserved by MUNity Solutions</p>
       </div>
     </div>
   );
