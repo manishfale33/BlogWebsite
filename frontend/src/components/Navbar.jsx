@@ -23,9 +23,9 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       <div onClick={handleNav} className='block md:hidden'>
-        {nav ? <AiOutlineClose size={20}/> : <AiOutlineMenu size={20} />}
+        {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
       </div>
-      
+
       {/* Mobile Navigation Menu */}
       <ul className={`${nav ? 'fixed left-0 top-0 w-[60%] h-full bg-[#ffff] border-r border-r-gray-900 ease-in-out duration-500' : 'ease-in-out duration-500 fixed left-[-100%]'} md:hidden`}>
         <h1 className='w-full text-3xl font-bold text-[#38bdf8] m-4'>MUNity Blogs</h1>
@@ -36,6 +36,31 @@ const Navbar = () => {
         <li className='p-4 border-b border-gray-600'>SupplyChain</li>
         <li className='p-4 border-b border-gray-600'>LogIn</li>
       </ul>
+
+      {/* Tablet Navigation */}
+      <div className='hidden md:block'>
+        <div onClick={handleNav}>
+          {nav ? (
+            <AiOutlineClose size={20} />
+          ) : (
+            <AiOutlineMenu size={20} />
+          )}
+        </div>
+
+        {nav && (
+          <ul className='fixed left-0 top-0 w-[60%] h-full bg-[#ffff] border-r border-r-gray-900 ease-in-out duration-500'>
+            <h1 className='w-full text-3xl font-bold text-[#38bdf8] m-4'>
+              MUNity Blogs
+            </h1>
+            <li className='p-4 border-b border-gray-600'>Home</li>
+            <li className='p-4 border-b border-gray-600'>GeoPolitics</li>
+            <li className='p-4 border-b border-gray-600'>Economics</li>
+            <li className='p-4 border-b border-gray-600'>StockMarket</li>
+            <li className='p-4 border-b border-gray-600'>SupplyChain</li>
+            <li className='p-4 border-b border-gray-600'>LogIn</li>
+          </ul>
+        )}
+      </div>
     </div>
   );
 };
