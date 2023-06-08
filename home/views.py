@@ -84,21 +84,18 @@ def categories(request):
 
 def categorical_filter(request, category_id):
     category = get_object_or_404(Category, pk=category_id)
-    articles = BlogModel.objects.filter(category=category)
-    paginator = Paginator(articles, 10)  # Show 10 articles per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    data = [
-        {
+    filtered_articles = BlogModel.objects.filter(category=category)
+    data = []
+    for article in filtered_articles:
+        article_data = {
             'id': article.id,
             'title': article.title,
-            'images': str(article.image),
+            'images': [str(article.image.url)],
             'author': article.author.username,
             'created_at': article.created_at,
             'category_name': article.category.name
         }
-        for article in page_obj
-    ]
+        data.append(article_data)
     return JsonResponse(data, safe=False)
 
 def details_article(request, article_id):
