@@ -37,16 +37,8 @@ const Navbar = () => {
         <li className='p-4 border-b border-gray-600'>LogIn</li>
       </ul>
 
-      {/* Tablet Navigation */}
-      <div className='hidden md:block'>
-        <div onClick={handleNav}>
-          {nav ? (
-            <AiOutlineClose size={20} />
-          ) : (
-            <AiOutlineMenu size={20} />
-          )}
-        </div>
 
+      
         {nav && (
           <ul className='fixed left-0 top-0 w-[60%] h-full bg-[#ffff] border-r border-r-gray-900 ease-in-out duration-500'>
             <h1 className='w-full text-3xl font-bold text-[#38bdf8] m-4'>
@@ -60,7 +52,6 @@ const Navbar = () => {
             <li className='p-4 border-b border-gray-600'>LogIn</li>
           </ul>
         )}
-      </div>
     </div>
   );
 };

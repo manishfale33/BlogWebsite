@@ -87,15 +87,16 @@ def categorical_filter(request, category_id):
     filtered_articles = BlogModel.objects.filter(category=category)
     data = []
     for article in filtered_articles:
-        article_data = {
-            'id': article.id,
-            'title': article.title,
-            'images': [str(article.image.url)],
-            'author': article.author.username,
-            'created_at': article.created_at,
-            'category_name': article.category.name
-        }
-        data.append(article_data)
+        if article.category:
+            article_data = {
+                'id': article.id,
+                'title': article.title,
+                'images': [str(article.image.url)],
+                'author': article.author.username,
+                'created_at': article.created_at,
+                'category_name': article.category.name
+            }
+            data.append(article_data)
     return JsonResponse(data, safe=False)
 
 def details_article(request, article_id):
@@ -107,7 +108,7 @@ def details_article(request, article_id):
         'images': [str(article.image.url)],
         'author': article.author.username,
         'created_at': article.created_at,
-        'category_name': article.category.name
+        'category_name': article.category.name if article.category else None
     }
     return JsonResponse(article_data)
 
