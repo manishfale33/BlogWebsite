@@ -27,10 +27,7 @@ const Litebet = () => {
         className="carousel"
         slideIndex={currentSlide}
         renderCenterLeftControls={({ previousSlide }) => (
-          <button
-            className="carousel-control relative"
-            onClick={previousSlide}
-          >
+          <button className="carousel-control relative" onClick={previousSlide}>
             <span className="arrow-icon">
               <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-blue-500 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-50"></span>
               &#10094;
@@ -60,9 +57,10 @@ const Litebet = () => {
               alt={`Carousel ${index + 1}`}
               className="w-full h-full object-cover"
             />
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            {/* Centered content */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
               {/* Typed Component */}
-              <div className="mb-8 text-center">
+              <div className="mb-8">
                 <p className="text-3xl font-bold pb-4 text-black"></p>
                 <Typed
                   className="text-2xl font-bold"
@@ -78,7 +76,6 @@ const Litebet = () => {
                   loop
                 />
               </div>
-
               {/* Write Blog button */}
               <button className="bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold py-3 px-8 rounded-md transition duration-300 ease-in-out">
                 Write Your Own Blog
