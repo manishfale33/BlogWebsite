@@ -9,13 +9,13 @@ import {
 
 const Footer = () => {
   return (
-    <div className='max-w-[1240px] mx-auto py-14 px-4 grid lg:grid-cols-3 gap-8 text-neutral-800 dark:bg-text-neutral-800 dark:text-white'>
+    <div className='max-w-[1240px] mx-auto py-14 px-4 grid lg:grid-cols-3 gap-8 text-neutral-800 dark:bg-text-neutral-800 yash'>
       <div className='flex flex-col justify-between'>
         <div>
           <h1 className='w-full text-3xl font-bold text-[#38bdf8]'>MUNity Blogs</h1>
           <p className='py-4 text-font_color'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id odit ullam iste repellat consequatur libero reiciendis, blanditiis accusantium.</p>
         </div>
-        <div className='flex justify-between md:w-[75%] my-6 text-font_color'>
+        <div className='flex justify-between md:w-[75%] my-6 text-font_color h5'>
           <FaFacebookSquare size={30} />
           <FaInstagram size={30} />
           <FaTwitterSquare size={30} />
@@ -27,11 +27,12 @@ const Footer = () => {
         <div>
           <h6 className='font-medium text-black'>Support</h6>
           <ul>
-            <li className='py-2 text-sm'>Terms Of Use</li>
-            <li className='py-2 text-sm'>Privacy Policy</li>
-            <li className='py-2 text-sm'>Creators Term</li>
+            <li className='py-2 text-sm h5'>Terms Of Use</li>
+            <li className='py-2 text-sm h5'>Privacy Policy</li>
+            <li className='py-2 text-sm h5'>Creators Term</li>
           </ul>
         </div>
+      
       </div>
       <div className='flex flex-col justify-between'>
         <div className=''>

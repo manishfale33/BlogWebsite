@@ -3,7 +3,7 @@ import React from 'react'
 export default function Tablet_view_cards(props) {
   return (
     <div>
-      <div className='text-font_color flex justify-center items-center flex-col'>
+      <div className=' text-font_color  flex justify-center items-center flex-col'>
       <div className="rounded-b-lg ml-8 flex items-center">
         <div>
         <img src={props.image} alt="" className='mt-10 rounded-lg h-48 w-96' />

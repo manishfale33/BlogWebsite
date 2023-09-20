@@ -3,7 +3,7 @@ import React from 'react'
 export default function MostRead_tablet(props) {
   return (
     <div>
-      <div className='text-font_color'>
+      
       <div className="rounded-b-lg grid justify-items-center mx-6">
         <img src={props.image} alt="" className='mt-10 rounded-lg h-48 w-96' />
         <p className='flex text-start justify-center w-80 font-bold'>{props.text}</p>
@@ -14,7 +14,7 @@ export default function MostRead_tablet(props) {
       <p className='ml-14'>{props.date}</p>
       </div>
       </div>
-    </div>
+    
     </div>
   )
 }

@@ -13,9 +13,15 @@ import MostRead_tablet from './components/MostRead_tablet';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
-import AnotherHome from './components/AnotherHome';
+import { useState, useEffect } from "react";
+import Header from './components/Header';
+
 
 function App() {
+
+  const [darkmode, setdarkmode] = useState(false)
+
+  
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -36,18 +42,17 @@ function App() {
     }
   };
   return (
-    <div>
-
-      <div>
+    <div className={`${darkmode && 'dark-mode'}  bg-patch_color`}>
+      <div className='min-h-[100vh]'>
         {/* navbar */}
-        <Navbar />
-        {/*hero secation with carousel */}
+        <Navbar/>
+        {/* Hero */}
         <Hero/>
         {/* home heading for all screens */}
         <HomeHeading />
         <div className='flex'>
           {/* left side for big screens*/}
-          <div className=" hidden lg:flex flex-col px-6 ml-4">
+          <div className=" hidden lg:flex flex-col pr-6 ">
             <div className='mt-10'>
               <Carousel_1 text="Algorithmic trading for multiple commodities markets, like Forex, Metals, Energy, etc." image={Images.img4} />
             </div>
@@ -71,17 +76,17 @@ function App() {
         </div>
       </div>
       {/* carousel for big screens */}
-      <div className='hidden lg:block mx-20 mt-4'>
+      <div className='hidden lg:block mx-20 mt-4 '>
         <Carousel responsive={responsive}>
-          <div > <BelowCard text="Design & Develop BERT Question Answering model explanations with visualization" name="Aditya P" date="September 17 2022" image={Images.img3} /></div>
+          <div className='' > <BelowCard text="Design & Develop BERT Question Answering model explanations with visualization" name="Aditya P" date="September 17 2022" image={Images.img3} /></div>
           <div><BelowCard text="Design and develop solution to anomaly detection classification problems" name="Ajay B" date="October 17 2022" image={Images.img2} /></div>
           <div ><BelowCard text="Design & Develop BERT Question Answering model explanations with visualization" name="Aditya P" date="October 17 2022" image={Images.img1} /></div>
           <div ><BelowCard text="Design & Develop BERT Question Answering model explanations with visualization" name="Aditya P" date="October 17 2022" image={Images.img1} /></div>
         </Carousel>
       </div>
       {/* most read for big screens */}
-      <div className=' bg-patch_color'>
-        <h2 className='ml-24 my-12 font-bold text-font_color text-2xl hidden lg:block'>Most read</h2>
+      <div className='  dark:text-white'>
+        <h2 className='ml-24 my-12 font-bold text-font_color text-2xl hidden lg:block h5'>Most read</h2>
         <div className='hidden lg:block mx-12 mt-4'>
           <Carousel responsive={responsive}>
             <div><BelowCard text="Design & Develop BERT Question Answering model explanations with visualization" name="Aditya P" date="September 17 2022" image={Images.img3} /></div>
@@ -119,7 +124,7 @@ function App() {
         </div>
       </div>
       {/* most read for tablet view */}
-      <div className='bg-patch_color'>
+      <div className='bg-patch_color '>
         <h2 className='font-bold text-xl ml-8 my-6 hidden md:flex lg:hidden'>Most read</h2>
         <div className="hidden md:flex lg:hidden">
           <div>
@@ -132,7 +137,10 @@ function App() {
           </div>
         </div>
       </div>
+      <Header handleToggleDarkMode={setdarkmode} />
       <Footer />
+        
+      
 
     </div >
   );
