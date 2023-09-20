@@ -6,12 +6,14 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from home.views import CategoryListCreateView, CategoryRetrieveUpdateDestroyView, BlogModelListCreateView, BlogModelRetrieveUpdateDestroyView, LikeListCreateView, LikeRetrieveUpdateDestroyView
 from home.views import latest_article, most_read, categories, categorical_filter, details_article
 from django.views.generic import TemplateView
-
+from home.views import UserListCreateView, UserRetrieveUpdateDestroyView
 urlpatterns = [
     path('', include('home.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('froala_editor/', include('froala_editor.urls')),
+    path('users/', UserListCreateView.as_view(), name='user-list'),
+    path('users/<int:pk>/', UserRetrieveUpdateDestroyView.as_view(), name='user-detail'),
     path('categories/', CategoryListCreateView.as_view(), name='category-list'),
     path('categories/<int:pk>/', CategoryRetrieveUpdateDestroyView.as_view(), name='category-detail'),
     path('blogmodels/', BlogModelListCreateView.as_view(), name='blogmodel-list'),

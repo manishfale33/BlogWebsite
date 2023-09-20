@@ -3,7 +3,9 @@ from .models import Category, BlogModel, Like
 from .serializers import CategorySerializer, BlogModelSerializer, LikeSerializer
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from django.contrib.auth.models import User
+from .serializers import UserSerializer
 
 class CategoryListCreateView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
@@ -112,3 +114,10 @@ def details_article(request, article_id):
     }
     return JsonResponse(article_data)
 
+class UserListCreateView(ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
