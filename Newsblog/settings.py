@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-(07(7qda1+_k(gx4hn(6v=7&0se9t$4j8q+c!j3gd^22)8zyf7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -43,17 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'froala_editor',
     'rest_framework',
+    'corsheaders',
    
 
 ]
 
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
-}
+REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": [
+    "rest_framework.permissions.AllowAny"]}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -63,7 +59,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'Newsblog.urls'
 
