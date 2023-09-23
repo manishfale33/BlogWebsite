@@ -51,7 +51,7 @@ export default function Heading() {
           <div className='' key={item.id}>
             <p className='mt-6 ml-1 md:ml-24 lg:ml-[320px] sm:pt-12 sm:tracking-tight text-black'>Category &gt; {category ? category.name : 'Unknown'}</p>
             <h1 className='mt-4 ml-1 md:ml-24 lg:ml-[320px] sm:pt-8 sm:tracking-wider font-bold sm:text-3xl text-font_color md:w-[580px]'>{item.title}<br />
-              {item.slug}</h1>
+              </h1>
             <p className='mt-4 ml-1 md:ml-24 lg:ml-[320px] sm:mt-8 tracking-tight'>{item.created_at}</p>
             <div className='md:ml-24  lg:flex lg:justify-center'>
               <img src={item.image} alt="" className='mt-4 mx-1 w-11/12 lg:h-[400px] sm:mt-12 lg:w-7/12 sm:flex lg:justify-center lg:align-center lg:mr-[120px] rounded-lg' />
