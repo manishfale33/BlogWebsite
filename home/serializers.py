@@ -19,6 +19,16 @@ class BlogModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogModel
         fields = '__all__'
+        author_name = serializers.SerializerMethodField()
+
+        def get_author_name(self,obj):
+            return f"{obj.author.first_name} {obj.author.last_name}";
+        def to_representation(self, instance):
+            data = super().to_representation(instance)
+
+            if isinstance(instance, BlogModel) and self.context.get('many', True):
+                data['author_name'] = instance.author.first_name
+                return data
 
 
 class LikeSerializer(serializers.ModelSerializer):

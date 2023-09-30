@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import Carousel_middle from './Carousel_midde';
 import axios from 'axios';
 
 export default function Carousel_1() {
   const [blogmodels, setBlogmodels] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [authors, setAuthors] = useState([]); // Add authors state
-  const [currentArticleIndex, setCurrentArticleIndex] = useState(0); // Track the current article
+  const [authors, setAuthors] = useState([]);
   const blogmodelsUrl = 'http://127.0.0.1:8000/blogmodels/';
   const categoryUrl = 'http://127.0.0.1:8000/categories/';
   const userrsUrl = 'http://127.0.0.1:8000/users/';
@@ -21,7 +21,7 @@ export default function Carousel_1() {
 
     axios.get(userrsUrl)
       .then((response) => {
-        setAuthors(response.data); // Set authors state
+        setAuthors(response.data);
       })
       .catch((error) => {
         console.error('Error fetching authors data:', error);
@@ -36,36 +36,67 @@ export default function Carousel_1() {
       });
   }, [blogmodelsUrl, categoryUrl, userrsUrl]);
 
-  useEffect(() => {
-    // Automatically transition to the next article every 5 seconds
-    const timer = setInterval(() => {
-      setCurrentArticleIndex((prevIndex) => (prevIndex + 1) % blogmodels.length);
-    }, 5000);
-
-    return () => {
-      clearInterval(timer); // Clear the timer on component unmount
-    };
-  }, [blogmodels]);
-
   return (
-    <div>
-      {/* Display the current article */}
-      {blogmodels.length > 0 && (
-        <div key={blogmodels[currentArticleIndex].id} className="relative w-[375px] rounded-b-lg">
-          {/* Add loading="lazy" to the img element for lazy loading */}
-          <img
-            src={blogmodels[currentArticleIndex].image}
-            alt=""
-            className="h-48 w-96 lg:ml-14 rounded-lg"
-            loading="lazy"
-          />
-          <div className="absolute bottom-0 px-4 py-1 bg-gray-500/50 lg:left-14 w-full rounded-b-lg">
-            <p className="text-gray-200 font-bold">{blogmodels[currentArticleIndex].title}</p>
-            <p className="text-gray-200 font-bold">Category: {categories.find((category) => category.id === blogmodels[currentArticleIndex].category)?.name || 'Unknown'}</p>
-            <p className="text-gray-200 font-bold">Author: {authors.find((author) => author.id === blogmodels[currentArticleIndex].author)?.email || 'Unknown'}</p>
+    <div className="flex flex-col items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-1">
+          {blogmodels.slice(0, 2).map((item, index) => {
+            // Find the category with a matching ID
+            const category = categories.find((category) => category.id === item.category);
+            // Find the author with a matching ID
+            const author = authors.find((author) => author.id === item.author);
+
+            return (
+              <div key={item.id} className={`relative mt-6`}>
+                <div className="flex justify-center items-center h-64 w-96 lg:ml-14 rounded-lg">
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="max-h-full max-w-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="absolute bottom-0 px-4 py-1 bg-gray-500/50 lg:left-14 w-full rounded-b-lg">
+                  <p className="text-gray-200 font-bold">{item.title}</p>
+                  <p className="text-gray-200 font-bold">Category: {category ? category.name : 'Unknown'}</p>
+                  <p className="text-gray-200 font-bold">Author: {author ? author.email : 'Unknown'}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="lg:col-span-1 relative">
+          <div className="lg:sticky lg:top-0 lg:h-screen">
+            <Carousel_middle />
           </div>
         </div>
-      )}
+        <div className="lg:col-span-1">
+          {blogmodels.slice(2, 4).map((item, index) => {
+            // Find the category with a matching ID
+            const category = categories.find((category) => category.id === item.category);
+            // Find the author with a matching ID
+            const author = authors.find((author) => author.id === item.author);
+
+            return (
+              <div key={item.id} className={`relative mt-6`}>
+                <div className="flex justify-center items-center h-64 w-96 lg:ml-14 rounded-lg">
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="max-h-full max-w-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="absolute bottom-0 px-4 py-1 bg-gray-500/50 lg:left-14 w-full rounded-b-lg">
+                  <p className="text-gray-200 font-bold">{item.title}</p>
+                  <p className="text-gray-200 font-bold">Category: {category ? category.name : 'Unknown'}</p>
+                  <p className="text-gray-200 font-bold">Author: {author ? author.email : 'Unknown'}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
